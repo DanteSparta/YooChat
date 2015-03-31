@@ -8,9 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>User Register</title>
 </head>
 <body>
-
+<form action="${pageContext.request.contextPath}/userLogin" method="post">
+  <label>
+    <input type="text" name="username">
+  </label>
+  <label>
+    <input type="password" name="password">
+  </label>
+  <input type="submit" name="Login">
+</form>
 </body>
 </html>
