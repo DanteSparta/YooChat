@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Apache Tomcat WebSocket Examples: Chat</title>
@@ -63,9 +64,9 @@
 
         Chat.initialize = function () {
             if (window.location.protocol == 'http:') {
-                Chat.connect('ws://' + window.location.host + '/chat');
+                Chat.connect('ws://' + window.location.host + '/publicChat');
             } else {
-                Chat.connect('wss://' + window.location.host + '/chat');
+                Chat.connect('wss://' + window.location.host + '/publicChat');
             }
         };
 

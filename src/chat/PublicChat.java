@@ -1,3 +1,4 @@
+package chat;
 
 import java.io.IOException;
 import java.util.Set;
@@ -13,21 +14,23 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
+import util.HTMLFilter;
 
 
-@ServerEndpoint(value = "/chat")
-public class Chat {
+@ServerEndpoint(value = "/publicChat")
+public class PublicChat{
     //  Logger for Chat
-    private static final Log log = LogFactory.getLog(Chat.class);
+    private static final Log log = LogFactory.getLog(PublicChat.class);
 
     private static final String GUEST_PREFIX = "Guest";
     private static final AtomicInteger connectionIds = new AtomicInteger(0);
-    private static final Set<Chat> connections = new CopyOnWriteArraySet<>();
+    private static final Set<PublicChat> connections = new CopyOnWriteArraySet<>();
 
     private final String nickname;
     private Session session;
 
-    public Chat() {
+
+    public PublicChat() {
         nickname = GUEST_PREFIX + connectionIds.getAndIncrement();
     }
 
@@ -66,7 +69,7 @@ public class Chat {
 
 
     private static void broadcast(String msg) {
-        for (Chat client : connections) {
+        for (PublicChat client : connections) {
             try {
                 synchronized (client) {
                     client.session.getBasicRemote().sendText(msg);

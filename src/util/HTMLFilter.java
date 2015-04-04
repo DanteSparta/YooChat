@@ -1,3 +1,5 @@
+package util;
+
 public final class HTMLFilter {
 
     public static String filter(String message) {
