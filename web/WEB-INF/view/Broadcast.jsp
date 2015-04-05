@@ -1,7 +1,8 @@
+<%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Apache Tomcat WebSocket Examples: Chat</title>
+    <title>BroadCast</title>
     <style type="text/css">
         input#chat {
             width: 410px
@@ -64,9 +65,9 @@
 
         Chat.initialize = function () {
             if (window.location.protocol == 'http:') {
-                Chat.connect('ws://' + window.location.host + '/publicChat');
+                Chat.connect('ws://' + window.location.host + '/broadcast');
             } else {
-                Chat.connect('wss://' + window.location.host + '/publicChat');
+                Chat.connect('wss://' + window.location.host + '/broadcast');
             }
         };
 
@@ -117,6 +118,15 @@
     <div id="console-container">
         <div id="console"/>
     </div>
+    <%
+        AtomicInteger counts = (AtomicInteger) application.getAttribute("counts");
+        Integer temp = counts.get();
+    %>
+    <%if (temp > 0) {%>
+    <div id="chatRoom">
+        <a href="${pageContext.request.contextPath}/yoo">Goto chatRoom</a>
+    </div>
+    <%} %>
 </div>
 </body>
 </html>

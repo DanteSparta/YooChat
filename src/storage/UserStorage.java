@@ -8,5 +8,5 @@ import java.util.concurrent.ConcurrentHashMap;
  * So, what's the fucking copyright?
  */
 public class UserStorage {
-    public static final Map<Integer, String> users = new ConcurrentHashMap<>();
+    public static final Map<Integer, String> names = new ConcurrentHashMap<>();
 }

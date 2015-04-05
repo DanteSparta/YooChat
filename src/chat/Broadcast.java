@@ -18,20 +18,20 @@ import storage.UserStorage;
 import util.HTMLFilter;
 
 
-@ServerEndpoint(value = "/publicChat")
-public class PublicChat {
+@ServerEndpoint(value = "/broadcast")
+public class Broadcast {
     //  Logger for Chat
-    private static final Log log = LogFactory.getLog(PublicChat.class);
+    private static final Log log = LogFactory.getLog(Broadcast.class);
 
     private static final AtomicInteger connectionIds = new AtomicInteger(0);
-    private static final Set<PublicChat> connections = new CopyOnWriteArraySet<>();
+    private static final Set<Broadcast> connections = new CopyOnWriteArraySet<>();
 
     private final String nickname;
     private Session session;
 
 
-    public PublicChat() {
-        nickname = UserStorage.users.get(connectionIds.getAndIncrement());
+    public Broadcast() {
+        nickname = UserStorage.names.get(connectionIds.getAndIncrement());
     }
 
 
@@ -67,7 +67,7 @@ public class PublicChat {
 
 
     private static void broadcast(String msg) {
-        for (PublicChat client : connections) {
+        for (Broadcast client : connections) {
             try {
                 synchronized (client) {
                     client.session.getBasicRemote().sendText(msg);
