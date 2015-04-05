@@ -14,15 +14,15 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
+import storage.UserStorage;
 import util.HTMLFilter;
 
 
 @ServerEndpoint(value = "/publicChat")
-public class PublicChat{
+public class PublicChat {
     //  Logger for Chat
     private static final Log log = LogFactory.getLog(PublicChat.class);
 
-    private static final String GUEST_PREFIX = "Guest";
     private static final AtomicInteger connectionIds = new AtomicInteger(0);
     private static final Set<PublicChat> connections = new CopyOnWriteArraySet<>();
 
@@ -31,7 +31,7 @@ public class PublicChat{
 
 
     public PublicChat() {
-        nickname = GUEST_PREFIX + connectionIds.getAndIncrement();
+        nickname = UserStorage.users.get(connectionIds.getAndIncrement());
     }
 
 
@@ -43,7 +43,6 @@ public class PublicChat{
         broadcast(message);
     }
 
-
     @OnClose
     public void end() {
         connections.remove(this);
@@ -51,7 +50,6 @@ public class PublicChat{
                 nickname, "has disconnected.");
         broadcast(message);
     }
-
 
     @OnMessage
     public void incoming(String message) {
