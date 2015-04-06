@@ -1,34 +1,36 @@
-<%@ page import="java.util.concurrent.atomic.AtomicInteger" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@page contentType="text/html; utf-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>BroadCast</title>
-    <style type="text/css">
-        input#chat {
-            width: 410px
-        }
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        #console-container {
-            width: 400px;
-        }
+    <title>Broadcast Page</title>
 
-        #console {
-            border: 1px solid #CCCCCC;
-            border-right-color: #999999;
-            border-bottom-color: #999999;
-            height: 170px;
-            overflow-y: scroll;
-            padding: 5px;
-            width: 100%;
-        }
+    <!-- Bootstrap Core CSS -->
+    <link href="${pageContext.request.contextPath}/style/bootstrap.min.css" rel="stylesheet">
 
-        #console p {
-            padding: 0;
-            margin: 0;
-        }
-    </style>
+    <!-- MetisMenu CSS -->
+    <link href="${pageContext.request.contextPath}/style/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="${pageContext.request.contextPath}/style/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${pageContext.request.contextPath}/style/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${pageContext.request.contextPath}/style/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <script type="application/javascript">
-        "use strict";
 
         var Chat = {};
 
@@ -69,6 +71,8 @@
             } else {
                 Chat.connect('wss://' + window.location.host + '/broadcast');
             }
+
+            localStorage.setItem("Count", 2);
         };
 
         Chat.sendMessage = (function () {
@@ -102,31 +106,63 @@
             for (var i = 0; i < noscripts.length; i++) {
                 noscripts[i].parentNode.removeChild(noscripts[i]);
             }
-        }, false);
+        }, false)
 
     </script>
 </head>
-<body>
-<div class="noscript"><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websockets rely on
-    Javascript being enabled. Please enable
-    Javascript and reload this page!</h2></div>
-<div>
-    <p>
-        <input type="text" placeholder="type and press enter to chat" id="chat"/>
-    </p>
 
-    <div id="console-container">
-        <div id="console"/>
+<body>
+
+<div class="col-lg-12">
+    <div class="col-lg-8" style="margin-left: 17.5%;">
+        <div class="chat-panel panel panel-default">
+            <div class="panel-heading">
+                Content &nbsp;&nbsp;&nbsp;
+                <%
+                    Integer count = (Integer) application.getAttribute("count");
+                    if (count >= 0) {
+                %>
+                <a id="chatRoom" href="${pageContext.request.contextPath}/yoo">Goto chatRoom</a>
+                <%
+                    }
+                %>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="console"/>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel-footer -->
+        <div class="panel-footer">
+            <div class="input-group">
+                <input id="chat" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-sm" id="btn-chat">
+                                        Send
+                                    </button>
+                                </span>
+            </div>
+        </div>
     </div>
-    <%
-        AtomicInteger counts = (AtomicInteger) application.getAttribute("counts");
-        Integer temp = counts.get();
-    %>
-    <%if (temp > 0) {%>
-    <div id="chatRoom">
-        <a href="${pageContext.request.contextPath}/yoo">Goto chatRoom</a>
-    </div>
-    <%} %>
+    <!-- /.panel -->
 </div>
+<!-- jQuery -->
+<script src="${pageContext.request.contextPath}/script/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="${pageContext.request.contextPath}/script/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="${pageContext.request.contextPath}/script/metisMenu.min.js"></script>
+
+<!-- Morris Charts JavaScript -->
+<script src="${pageContext.request.contextPath}/script/raphael-min.js"></script>
+<script src="${pageContext.request.contextPath}/script/morris.min.js"></script>
+<script src="${pageContext.request.contextPath}/script/morris-data.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="${pageContext.request.contextPath}/script/sb-admin-2.js"></script>
 </body>
+
 </html>

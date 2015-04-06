@@ -23,8 +23,8 @@ public class Listener implements ServletContextListener {
         ServletContext application = servletContextEvent.getServletContext();
         application.setAttribute("users", users);
 
-        AtomicInteger counts = new AtomicInteger(1);
-        application.setAttribute("counts", counts);
+        Integer count = 2;
+        application.setAttribute("count", count);
     }
 
     @Override

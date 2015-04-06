@@ -37,7 +37,8 @@ public class UserLogin extends HttpServlet {
         //  Check username exists
         for (String temp : names.values()) {
             if (temp.equals(username)) {
-                System.out.println("Already exists");
+                response.sendRedirect("/login.jsp");
+                session.setAttribute("exist", "Nickname already exits!");
                 return;
             }
         }
@@ -52,6 +53,9 @@ public class UserLogin extends HttpServlet {
         session.setAttribute("user", user);
         List<User> users = (List<User>) request.getServletContext().getAttribute("users");
         users.add(user);
+        //
+        Integer count = (Integer) request.getServletContext().getAttribute("count");
+        request.getServletContext().setAttribute("count", --count);
         //  Forward to Broadcast.jsp
         request.getRequestDispatcher("WEB-INF/view/Broadcast.jsp").forward(request, response);
     }

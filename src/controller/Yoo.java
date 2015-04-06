@@ -17,8 +17,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Yoo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AtomicInteger counts = (AtomicInteger) request.getServletContext().getAttribute("counts");
-        counts.decrementAndGet();
         request.getRequestDispatcher("/WEB-INF/view/chatRoom.jsp").forward(request, response);
     }
 }
