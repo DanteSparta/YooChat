@@ -53,11 +53,9 @@ public class UserLogin extends HttpServlet {
         session.setAttribute("user", user);
         List<User> users = (List<User>) request.getServletContext().getAttribute("users");
         users.add(user);
-        //
-        Integer count = (Integer) request.getServletContext().getAttribute("count");
-        request.getServletContext().setAttribute("count", --count);
-        //  Forward to Broadcast.jsp
-        request.getRequestDispatcher("WEB-INF/view/Broadcast.jsp").forward(request, response);
+        //  Forward to broadcast.jsp
+        request.getRequestDispatcher("WEB-INF/view/broadcast.jsp").forward(request, response);
+
     }
 
     @Override

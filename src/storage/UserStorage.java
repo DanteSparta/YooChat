@@ -1,5 +1,6 @@
 package storage;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -8,5 +9,5 @@ import java.util.concurrent.ConcurrentHashMap;
  * So, what's the fucking copyright?
  */
 public class UserStorage {
-    public static final Map<Integer, String> names = new ConcurrentHashMap<>();
+    public static final Map<Integer, String> names = new HashMap<>();
 }

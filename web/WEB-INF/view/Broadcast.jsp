@@ -118,14 +118,7 @@
         <div class="chat-panel panel panel-default">
             <div class="panel-heading">
                 Content &nbsp;&nbsp;&nbsp;
-                <%
-                    Integer count = (Integer) application.getAttribute("count");
-                    if (count >= 0) {
-                %>
                 <a id="chatRoom" href="${pageContext.request.contextPath}/yoo">Goto chatRoom</a>
-                <%
-                    }
-                %>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -137,12 +130,13 @@
         <div class="panel-footer">
             <div class="input-group">
                 <input id="chat" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-sm" id="btn-chat">Send</button>
+                    </span>
             </div>
+        </div>
+        <div id="error" style="margin-left: 15px;">
+            ${sessionScope.error}
         </div>
     </div>
     <!-- /.panel -->
